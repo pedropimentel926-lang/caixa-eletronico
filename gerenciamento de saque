@@ -1,0 +1,111 @@
+
+#include <stdio.h>
+#include <locale.h>
+
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+
+    int saque;
+    int restante;
+
+    // Estoque inicial de cédulas
+    int estoque200 = 3;
+    int estoque100 = 4;
+    int estoque50 = 5;
+    int estoque20 = 6;
+    int estoque10 = 8;
+    int estoque5 = 10;
+
+    // Quantidade máxima que pode ser entregue
+    int max200 = estoque200 - 1;
+    int max100 = estoque100 - 1;
+    int max50 = estoque50 - 1;
+    int max20 = estoque20 - 1;
+    int max10 = estoque10 - 1;
+    int max5 = estoque5 - 1;
+
+    // Quantidade de cédulas entregues
+    int notas200 = 0;
+    int notas100 = 0;
+    int notas50 = 0;
+    int notas20 = 0;
+    int notas10 = 0;
+    int notas5 = 0;
+
+    int totalCedulas = 0;
+
+    printf("Digite o valor do saque: R$ ");
+    scanf("%d", &saque);
+
+    if (saque <= 0) {
+        printf("Valor de saque invalido!\n");
+        return 0;
+    }
+
+    restante = saque;
+
+    // Calcula as cédulas de R$ 200
+    notas200 = restante / 200;
+    if (notas200 > max200) {
+        notas200 = max200;
+    }
+    restante -= notas200 * 200;
+
+    // Calcula as cédulas de R$ 100
+    notas100 = restante / 100;
+    if (notas100 > max100) {
+        notas100 = max100;
+    }
+    restante -= notas100 * 100;
+
+    // Calcula as cédulas de R$ 50
+    notas50 = restante / 50;
+    if (notas50 > max50) {
+        notas50 = max50;
+    }
+    restante -= notas50 * 50;
+
+    // Calcula as cédulas de R$ 20
+    notas20 = restante / 20;
+    if (notas20 > max20) {
+        notas20 = max20;
+    }
+    restante -= notas20 * 20;
+
+    // Calcula as cédulas de R$ 10
+    notas10 = restante / 10;
+    if (notas10 > max10) {
+        notas10 = max10;
+    }
+    restante -= notas10 * 10;
+
+    // Calcula as cédulas de R$ 5
+    notas5 = restante / 5;
+    if (notas5 > max5) {
+        notas5 = max5;
+    }
+    restante -= notas5 * 5;
+
+    // Verifica se o saque foi composto exatamente
+    if (restante != 0) {
+        printf("\nNao foi possivel realizar o saque ");
+        printf("com essa distribuicao de cedulas.\n");
+        return 0;
+    }
+
+    totalCedulas = notas200 + notas100 + notas50
+                 + notas20 + notas10 + notas5;
+
+    printf("\n--- RESUMO DO SAQUE ---\n");
+    printf("Cedulas de R$ 200: %d\n", notas200);
+    printf("Cedulas de R$ 100: %d\n", notas100);
+    printf("Cedulas de R$ 50:  %d\n", notas50);
+    printf("Cedulas de R$ 20:  %d\n", notas20);
+    printf("Cedulas de R$ 10:  %d\n", notas10);
+    printf("Cedulas de R$ 5:   %d\n", notas5);
+
+    printf("Total de cedulas: %d\n", totalCedulas);
+    printf("Valor sacado: R$ %d\n", saque);
+
+    return 0;
+}
